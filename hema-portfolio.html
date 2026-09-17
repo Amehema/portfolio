@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hema — Product Engineer Trainee &amp; Framework Developer</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F4;
+    --bg-panel: #FFFFFF;
+    --bg-panel-2: #F0EEEC;
+    --ink: #211E1D;
+    --ink-soft: #56514E;
+    --ink-faint: #8C8683;
+    --teal: #6E1E2B;
+    --teal-soft: #F3E3E5;
+    --sienna: #8B3A46;
+    --sienna-bg: #F3E3E5;
+    --line: #E4E1DF;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161413;
+      --bg-panel: #201D1B;
+      --bg-panel-2: #252220;
+      --ink: #EDEAE7;
+      --ink-soft: #B4AEAA;
+      --ink-faint: #847E7A;
+      --teal: #C6606D;
+      --teal-soft: #3A2226;
+      --sienna: #D98A93;
+      --sienna-bg: #3A2226;
+      --line: #332E2B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161413;
+    --bg-panel: #201D1B;
+    --bg-panel-2: #252220;
+    --ink: #EDEAE7;
+    --ink-soft: #B4AEAA;
+    --ink-faint: #847E7A;
+    --teal: #C6606D;
+    --teal-soft: #3A2226;
+    --sienna: #D98A93;
+    --sienna-bg: #3A2226;
+    --line: #332E2B;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--sienna);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Nav ---------- */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    color: var(--ink-soft);
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--teal); text-decoration: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 76px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(42px, 6vw, 64px);
+    line-height: 1.04;
+    margin: 0 0 10px;
+  }
+  .hero-role {
+    color: var(--ink-soft);
+    font-size: 17px;
+    margin: 0 0 22px;
+  }
+  .hero-role span { color: var(--ink-faint); padding: 0 8px; }
+  .hero-bio {
+    max-width: 52ch;
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); text-decoration: none; }
+  .btn.primary {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #F4F6F2;
+  }
+  .btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+
+  /* Flow diagram (hero) */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .flow-title {
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin: 0 0 18px;
+  }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    position: relative;
+    padding-bottom: 22px;
+  }
+  .flow-step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 30px;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  .flow-num {
+    flex: none;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    font-family: var(--mono);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-panel);
+    z-index: 1;
+  }
+  .flow-label {
+    font-size: 15px;
+    padding-top: 4px;
+    color: var(--ink);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .flow-step { opacity: 0; animation: rise 0.5s ease forwards; }
+    .flow-step:nth-child(1) { animation-delay: .05s; }
+    .flow-step:nth-child(2) { animation-delay: .15s; }
+    .flow-step:nth-child(3) { animation-delay: .25s; }
+    .flow-step:nth-child(4) { animation-delay: .35s; }
+    .flow-step:nth-child(5) { animation-delay: .45s; }
+    .flow-step:nth-child(6) { animation-delay: .55s; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 34px;
+  }
+  .section-num { font-family: var(--mono); font-size: 13px; color: var(--ink-faint); }
+  .section-title { font-family: var(--serif); font-weight: 600; font-size: 28px; margin: 0; }
+
+  /* ---------- About ---------- */
+  .about-text { max-width: 62ch; font-size: 17px; color: var(--ink-soft); }
+  .about-text p { margin: 0 0 16px; }
+
+  /* ---------- Experience ---------- */
+  .job {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 32px;
+  }
+  .job-meta { color: var(--ink-faint); font-size: 14px; }
+  .job-meta .company { color: var(--ink); font-weight: 500; font-size: 15px; margin-bottom: 4px; }
+  .job-title { font-size: 18px; font-weight: 600; margin: 0 0 16px; }
+  .job-list { margin: 0; padding: 0; list-style: none; }
+  .job-list li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 10px;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+  }
+  .job-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Skills ---------- */
+  .skill-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .skill-row:last-child { border-bottom: 1px solid var(--line); }
+  .skill-cat { font-size: 14px; color: var(--ink-faint); padding-top: 2px; }
+  .skill-items { font-size: 16px; color: var(--ink); }
+
+  /* ---------- Projects ---------- */
+  .project {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+  .project:last-child { margin-bottom: 0; }
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 6px;
+  }
+  .project-name { font-family: var(--serif); font-weight: 600; font-size: 21px; margin: 0; }
+  .project-stack { font-family: var(--mono); font-size: 12.5px; color: var(--teal); white-space: nowrap; padding-top: 5px; }
+  .project-tag { font-size: 13px; color: var(--ink-faint); margin: 0 0 16px; }
+  .project-desc { color: var(--ink-soft); font-size: 15.5px; margin: 0 0 22px; max-width: 66ch; }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 20px;
+  }
+  .split-block h4 {
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .split-block ul { margin: 0; padding: 0; list-style: none; }
+  .split-block li {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .split-block li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    background: var(--ink-faint);
+  }
+
+  .mini-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 20px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .mini-flow .node {
+    border: 1px solid var(--line);
+    padding: 5px 11px;
+    background: var(--bg-panel-2);
+    color: var(--ink);
+  }
+  .mini-flow .arrow { color: var(--ink-faint); }
+
+  .learning {
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .learning strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- Education ---------- */
+  .edu-entry {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 32px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .edu-entry:last-child { border-bottom: 1px solid var(--line); }
+  .edu-year { color: var(--ink-faint); font-size: 14px; }
+  .edu-degree { font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+  .edu-school { color: var(--ink-soft); font-size: 15px; margin: 0; }
+
+  /* ---------- Certifications / Strengths ---------- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .list-plain { margin: 0; padding: 0; list-style: none; }
+  .list-plain li {
+    font-size: 15.5px;
+    color: var(--ink-soft);
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+  }
+  .list-plain li:last-child { border-bottom: 1px solid var(--line); }
+
+  /* ---------- Contact ---------- */
+  .contact-panel {
+    background: var(--teal);
+    color: #F4F6F2;
+    padding: 48px;
+  }
+  .contact-panel .section-title { color: #F4F6F2; }
+  .contact-panel .section-num { color: color-mix(in srgb, #F4F6F2 55%, transparent); }
+  .contact-lede { max-width: 52ch; font-size: 17px; color: color-mix(in srgb, #F4F6F2 88%, transparent); margin: 0 0 28px; }
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .contact-grid a {
+    border: 1px solid color-mix(in srgb, #F4F6F2 35%, transparent);
+    color: #F4F6F2;
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  .contact-grid a:hover {
+    background: color-mix(in srgb, #F4F6F2 12%, transparent);
+    text-decoration: none;
+  }
+  .note {
+    font-size: 12.5px;
+    color: color-mix(in srgb, #F4F6F2 60%, transparent);
+    margin-top: 22px;
+  }
+
+  footer {
+    padding: 28px 0 48px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .job, .edu-entry { grid-template-columns: 1fr; gap: 8px; }
+    .split, .two-col { grid-template-columns: 1fr; }
+    .skill-row { grid-template-columns: 1fr; gap: 6px; }
+    .contact-panel { padding: 32px 24px; }
+    .project { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <div class="brand">Hema</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1 class="hero-name">Hema</h1>
+      <p class="hero-role">Product Engineer Trainee<span>·</span>Framework Developer<span>·</span>Aspiring Full Stack Developer</p>
+      <p class="hero-bio">I'm a Computer Science graduate who likes taking apart a business requirement, finding the logic underneath it, and turning that into working software. Most days that means reading existing code closely, fixing what's broken, and building toward a Full Stack role one project at a time.</p>
+      <div class="hero-links">
+        <a class="btn primary" href="#projects">View projects</a>
+        <a class="btn" href="https://github.com/Amehema" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/hemav2005" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:vhema2132005@gmail.com">Contact me</a>
+      </div>
+    </div>
+    <div class="flow" aria-label="Development approach">
+      <p class="flow-title">My development approach</p>
+      <div class="flow-step"><span class="flow-num">1</span><span class="flow-label">Understand the requirement</span></div>
+      <div class="flow-step"><span class="flow-num">2</span><span class="flow-label">Identify the issue</span></div>
+      <div class="flow-step"><span class="flow-num">3</span><span class="flow-label">Analyze existing code</span></div>
+      <div class="flow-step"><span class="flow-num">4</span><span class="flow-label">Implement the change</span></div>
+      <div class="flow-step"><span class="flow-num">5</span><span class="flow-label">Test</span></div>
+      <div class="flow-step"><span class="flow-num">6</span><span class="flow-label">Submit</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-text">
+      <p>I'm currently a Product Engineer Trainee in Framework Development at Selfservit Solutions Pvt. Ltd., where I contribute to both web and mobile applications built with JavaScript, jQuery, Kendo UI, and Cordova. My work centres on modifying existing functionality, fixing bugs, and shipping improvements against real business requirements.</p>
+      <p>What I enjoy most is the translation step — understanding how a business process actually works, finding the logic behind it, and turning that into functionality that holds up. I'm a quick learner with a genuine interest in problem-solving, and I'm building toward a career as a skilled Full Stack Developer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="job">
+      <div class="job-meta">
+        <div class="company">Selfservit Solutions Pvt. Ltd.</div>
+        April 2026 – Present
+      </div>
+      <div>
+        <h3 class="job-title">Product Engineer Trainee — Framework Development</h3>
+        <ul class="job-list">
+          <li>Contribute to both web and mobile applications in a product-based environment.</li>
+          <li>Work with JavaScript, jQuery, Kendo UI, and Cordova.</li>
+          <li>Modify existing functionality based on business requirements.</li>
+          <li>Identify and fix application bugs and issues.</li>
+          <li>Support functionality related to Sales and Service.</li>
+          <li>Contribute to usability and performance improvements.</li>
+          <li>Discuss requirements with teammates and complete assigned tasks.</li>
+          <li>Work under the guidance of senior developers, building practical development experience.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+
+      <h2 class="section-title">Technical skills</h2>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Languages</div>
+      <div class="skill-items">JavaScript, Python, PHP, C#</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Frontend &amp; web</div>
+      <div class="skill-items">HTML, CSS, Angular, jQuery, Kendo UI</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Backend &amp; frameworks</div>
+      <div class="skill-items">.NET, Django, Cordova</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Database</div>
+      <div class="skill-items">SQL, MySQL</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">Tools</div>
+      <div class="skill-items">Git, GitHub</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat">AI tools</div>
+      <div class="skill-items">ChatGPT, Claude, Gemini, Perplexity</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+
+      <h2 class="section-title">Projects</h2>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-name">Inventory Management System</h3>
+        <span class="project-stack">Python · Django</span>
+      </div>
+      <p class="project-tag">Learning project</p>
+      <p class="project-desc">Built to gain hands-on experience with Python and Django — an inventory application with separate Admin and User functionality.</p>
+      <div class="split">
+        <div class="split-block">
+          <h4>Admin</h4>
+          <ul>
+            <li>Add, update, delete, and view products</li>
+            <li>Manage stock</li>
+            <li>Add users</li>
+            <li>Check orders</li>
+          </ul>
+        </div>
+        <div class="split-block">
+          <h4>User</h4>
+          <ul>
+            <li>View and search products</li>
+            <li>Place orders</li>
+            <li>View orders</li>
+            <li>Manage profile</li>
+          </ul>
+        </div>
+      </div>
+      <div class="learning"><strong>Key learning —</strong> Django development, CRUD operations, role-based functionality, application workflows, and Git/GitHub.</div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-name">Student Report Card Generator</h3>
+        <span class="project-stack">Python · MySQL · CMD</span>
+      </div>
+      <p class="project-tag">Command-line learning project</p>
+      <p class="project-desc">A database-driven application to practice Python programming, built to manage student records from the command line.</p>
+      <div class="split">
+        <div class="split-block">
+          <h4>Admin</h4>
+          <ul>
+            <li>Add student details</li>
+            <li>Add and update marks</li>
+            <li>Perform CRUD operations</li>
+            <li>Manage student records</li>
+          </ul>
+        </div>
+        <div class="split-block">
+          <h4>User</h4>
+          <ul>
+            <li>View marks and reports</li>
+            <li>Generate reports as PDF</li>
+            <li>Send reports to email</li>
+          </ul>
+        </div>
+      </div>
+      <div class="learning"><strong>Key learning —</strong> Python, MySQL connectivity, CRUD operations, data handling, PDF generation, email integration, and command-line application development.</div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3 class="project-name">Decentralized Peer Review Management System</h3>
+        <span class="project-stack">PHP · MySQL</span>
+      </div>
+      <p class="project-tag">College team project</p>
+      <p class="project-desc">A research-paper management system built with a team, giving reviewers a clear approval path before a paper reaches the public.</p>
+      <div class="mini-flow" aria-label="Workflow">
+        <span class="node">Writer submits paper</span><span class="arrow">→</span>
+        <span class="node">Reviewer approves / rejects</span><span class="arrow">→</span>
+        <span class="node">Public views approved papers</span>
+      </div>
+      <div class="split">
+        <div class="split-block">
+          <h4>My contribution</h4>
+          <ul>
+            <li>PHP development</li>
+            <li>Data handling</li>
+            <li>File handling</li>
+            <li>Problem-solving</li>
+            <li>Collaboration with team members</li>
+          </ul>
+        </div>
+      </div>
+      <div class="learning"><strong>Key learning —</strong> PHP, MySQL, file handling, data management, teamwork, user roles, and the software development process.</div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-entry">
+      <div class="edu-year">2026 – Present</div>
+      <div>
+        <p class="edu-degree">Master of Computer Applications (MCA)</p>
+        <p class="edu-school">University of Madras — Correspondence / Distance Learning</p>
+      </div>
+    </div>
+    <div class="edu-entry">
+      <div class="edu-year">2022 – 2025 · CGPA 8.1</div>
+      <div>
+        <p class="edu-degree">Bachelor of Science — Computer Science</p>
+        <p class="edu-school">Sridevi Arts and Science College, Ponneri, Tiruvallur, Tamil Nadu</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="section-head">
+
+      <h2 class="section-title">Certifications &amp; strengths</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <h4 style="font-size:13px;color:var(--ink-faint);font-weight:500;margin:0 0 4px;">Certifications</h4>
+        <ul class="list-plain">
+          <li>Full Stack Development — PHP</li>
+          <li>Full Stack Development — Python</li>
+          <li>Full Stack Development — .NET</li>
+          <li>Additional: Django, Cordova, Kendo UI, jQuery</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size:13px;color:var(--ink-faint);font-weight:500;margin:0 0 4px;">Strengths</h4>
+        <ul class="list-plain">
+          <li>Problem-solving &amp; quick learning</li>
+          <li>Understanding business logic</li>
+          <li>Bug fixing &amp; adaptability</li>
+          <li>Continuous learning &amp; team collaboration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none; padding-bottom: 0;">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div class="section-head">
+
+        <h2 class="section-title">Let's connect</h2>
+      </div>
+      <p class="contact-lede">Interested in working together or discussing a project? Reach out — I'm always glad to talk through a problem or a piece of code.</p>
+      <div class="contact-grid">
+        <a href="mailto:vhema2132005@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/hemav2005" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Amehema" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://share.google/YekR7Mhr9VB1GSHIb" target="_blank" rel="noopener">GeeksforGeeks</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Built by Hema.</footer>
+
+</body>
+</html>
